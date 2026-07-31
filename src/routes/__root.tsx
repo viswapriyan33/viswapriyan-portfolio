@@ -86,6 +86,10 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { name: "author", content: "Viswapriyan R" },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
+      { property: "og:title", content: "Viswapriyan R — Front-End Developer" },
+      { name: "twitter:title", content: "Viswapriyan R — Front-End Developer" },
+      { property: "og:description", content: "Premium portfolio of Viswapriyan R, aspiring front-end developer." },
+      { name: "twitter:description", content: "Premium portfolio of Viswapriyan R, aspiring front-end developer." },
     ],
     links: [
       {
