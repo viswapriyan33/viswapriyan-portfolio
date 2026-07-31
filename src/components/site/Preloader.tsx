@@ -1,9 +1,12 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { AnimatePresence, motion } from "motion/react";
 
 export function Preloader({ onDone }: { onDone: () => void }) {
   const [progress, setProgress] = useState(0);
   const [visible, setVisible] = useState(true);
+
+  const doneRef = useRef(onDone);
+  doneRef.current = onDone;
 
   useEffect(() => {
     const start = Date.now();
@@ -15,12 +18,12 @@ export function Preloader({ onDone }: { onDone: () => void }) {
         clearInterval(id);
         setTimeout(() => {
           setVisible(false);
-          onDone();
+          doneRef.current();
         }, 300);
       }
     }, 40);
     return () => clearInterval(id);
-  }, [onDone]);
+  }, []);
 
 
   return (
