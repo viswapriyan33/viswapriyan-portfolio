@@ -33,19 +33,18 @@ export const Route = createFileRoute("/")({
 });
 
 function Index() {
-  const [ready, setReady] = useState(false);
   const [paletteOpen, setPaletteOpen] = useState(false);
 
   return (
     <>
-      <Preloader onDone={() => setReady(true)} />
+      <Preloader onDone={() => undefined} />
       <Background />
       <Cursor />
       <ScrollProgress />
       <Navbar onOpenPalette={() => setPaletteOpen(true)} />
       <CommandPalette open={paletteOpen} setOpen={setPaletteOpen} />
       <BackToTop />
-      <main className="transition-all duration-1000" style={{ opacity: ready ? 1 : 0.001 }}>
+      <main>
         <Hero />
         <About />
         <TechStack />
