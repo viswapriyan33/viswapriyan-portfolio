@@ -11,18 +11,31 @@ export function Preloader({ onDone }: { onDone: () => void }) {
   useEffect(() => {
     const start = Date.now();
     const duration = 2200;
-    const id = setInterval(() => {
+    let raf = 0;
+    let finished = false;
+
+    const finish = () => {
+      if (finished) return;
+      finished = true;
+      setProgress(100);
+      setVisible(false);
+      doneRef.current();
+    };
+
+    const tick = () => {
       const p = Math.min(1, (Date.now() - start) / duration);
       setProgress(Math.round((1 - Math.pow(1 - p, 3)) * 100));
-      if (p >= 1) {
-        clearInterval(id);
-        setTimeout(() => {
-          setVisible(false);
-          doneRef.current();
-        }, 300);
-      }
-    }, 40);
-    return () => clearInterval(id);
+      if (p >= 1) finish();
+      else raf = requestAnimationFrame(tick);
+    };
+    raf = requestAnimationFrame(tick);
+    // Hard safety net: never leave the site hidden behind the preloader.
+    const guard = setTimeout(finish, duration + 800);
+
+    return () => {
+      cancelAnimationFrame(raf);
+      clearTimeout(guard);
+    };
   }, []);
 
 
