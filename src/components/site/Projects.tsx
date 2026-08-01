@@ -66,8 +66,10 @@ function Thumb({ repo, tall }: { repo: Repo; tall?: boolean }) {
     `${raw}/banner.png`,
     `${raw}/thumbnail.png`,
     `${raw}/assets/preview.png`,
-    `https://opengraph.githubassets.com/1/${repo.full_name}`,
+    `${raw}/public/preview.png`,
+    `${raw}/screenshot.png`,
   ];
+
   const [idx, setIdx] = useState(0);
   const failed = idx >= candidates.length;
   const icon = LANG_ICON[repo.language ?? ""];
