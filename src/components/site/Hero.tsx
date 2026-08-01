@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { AnimatePresence, motion } from "motion/react";
 import { ArrowDown, Download, Mail } from "lucide-react";
-import profileImg from "@/assets/profile.png";
+import profileImg from "@/assets/viswa-cutout.png";
 
 const ROLES = [
   "Aspiring Front-End Developer",
@@ -35,7 +35,6 @@ function Magnetic({ children }: { children: React.ReactNode }) {
 
 export function Hero() {
   const [roleIndex, setRoleIndex] = useState(0);
-  const [modal, setModal] = useState(false);
 
   useEffect(() => {
     const t = setInterval(() => setRoleIndex((i) => (i + 1) % ROLES.length), 2600);
@@ -57,8 +56,8 @@ export function Hero() {
         <div className="absolute inset-0 bg-gradient-to-r from-background via-background/70 to-background/20" />
       </div>
 
-      <div className="mx-auto grid w-full max-w-6xl items-center gap-14 md:grid-cols-[1.1fr_0.9fr]">
-        <div>
+      <div className="mx-auto grid w-full max-w-6xl items-center gap-12 md:grid-cols-[1.15fr_0.85fr] md:gap-10">
+        <div className="text-center md:text-left">
           <motion.span
             initial={{ opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
@@ -68,16 +67,16 @@ export function Hero() {
             <span className="h-1.5 w-1.5 rounded-full bg-neon" /> St. Joseph&apos;s College of Engineering
           </motion.span>
 
-          <h1 className="mt-6 font-display text-5xl font-semibold leading-[1.05] md:text-7xl">
+          <h1 className="mt-6 font-display font-semibold leading-[1.05] tracking-[-0.03em]">
             <motion.span
               initial={{ opacity: 0, filter: "blur(10px)", y: 20 }}
               animate={{ opacity: 1, filter: "blur(0px)", y: 0 }}
               transition={{ duration: 0.8 }}
-              className="block text-muted-foreground"
+              className="block text-[clamp(1.15rem,3.4vw,1.75rem)] font-medium text-muted-foreground"
             >
               Hi, I&apos;m
             </motion.span>
-            <span className="mt-2 block">
+            <span className="mt-2 block whitespace-nowrap text-[clamp(2.1rem,8.6vw,4.75rem)]">
               {title.split("").map((c, i) => (
                 <motion.span
                   key={i}
@@ -111,7 +110,7 @@ export function Hero() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.9, duration: 0.8 }}
-            className="mt-5 max-w-md text-base text-muted-foreground"
+            className="mx-auto mt-5 max-w-md text-base leading-relaxed text-muted-foreground md:mx-0"
           >
             Building Modern, Beautiful and Interactive Web Experiences.
           </motion.p>
@@ -120,7 +119,7 @@ export function Hero() {
             initial={{ opacity: 0, y: 18 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 1.05, duration: 0.6 }}
-            className="mt-9 flex flex-wrap items-center gap-4"
+            className="mt-9 flex flex-wrap items-center justify-center gap-4 md:justify-start"
           >
             <Magnetic>
               <a
@@ -144,61 +143,43 @@ export function Hero() {
           <motion.div
             animate={{ y: [0, 10, 0] }}
             transition={{ repeat: Infinity, duration: 2.2 }}
-            className="mt-14 flex items-center gap-2 text-xs uppercase tracking-[0.3em] text-muted-foreground"
+            className="mt-14 hidden items-center gap-2 text-xs uppercase tracking-[0.3em] text-muted-foreground md:flex"
           >
             <ArrowDown className="h-4 w-4" /> Scroll
           </motion.div>
         </div>
 
         <motion.div
-          initial={{ opacity: 0, x: 60, scale: 0.94 }}
+          initial={{ opacity: 0, x: 40, scale: 0.96 }}
           animate={{ opacity: 1, x: 0, scale: 1 }}
           transition={{ duration: 1, ease: [0.22, 1, 0.36, 1], delay: 0.3 }}
-          className="relative mx-auto w-full max-w-sm"
+          className="relative mx-auto w-full max-w-[22rem] md:max-w-none"
         >
+          {/* ambient light behind the subject so the cut-out sits inside the scene */}
           <div
-            className="absolute inset-0 -z-10 rounded-full blur-3xl"
-            style={{ background: "radial-gradient(circle, var(--primary), transparent 70%)", opacity: 0.4 }}
+            className="pointer-events-none absolute inset-x-0 top-[8%] -z-10 mx-auto aspect-square w-[85%] rounded-full blur-3xl"
+            style={{ background: "radial-gradient(circle, var(--primary), transparent 68%)", opacity: 0.35 }}
           />
-          <button
-            data-cursor
-            onClick={() => setModal(true)}
-            aria-label="View larger portrait"
-            className="group relative block w-full overflow-hidden rounded-[2rem] border border-primary/30"
-            style={{ boxShadow: "var(--shadow-glow)" }}
-          >
-            <img
-              src={profileImg}
-              alt="Viswapriyan R, front-end developer, in a navy blue suit"
-              className="w-full transition-transform duration-700 group-hover:scale-105"
-            />
-            <span className="pointer-events-none absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-background to-transparent" />
-          </button>
+          <div
+            className="pointer-events-none absolute inset-x-8 bottom-[6%] -z-10 h-24 rounded-full blur-2xl"
+            style={{ background: "radial-gradient(ellipse, var(--violet), transparent 70%)", opacity: 0.35 }}
+          />
+          <motion.img
+            src={profileImg}
+            alt="Viswapriyan R, front-end developer, in a navy blue suit"
+            animate={{ y: [0, -12, 0] }}
+            transition={{ repeat: Infinity, duration: 7, ease: "easeInOut" }}
+            className="relative w-full select-none object-contain"
+            style={{
+              filter: "drop-shadow(0 30px 60px oklch(0.16 0.03 265 / 0.85)) drop-shadow(0 0 45px oklch(0.72 0.16 230 / 0.28))",
+              maskImage:
+                "linear-gradient(to bottom, transparent 0%, #000 12%, #000 74%, transparent 98%)",
+              WebkitMaskImage:
+                "linear-gradient(to bottom, transparent 0%, #000 12%, #000 74%, transparent 98%)",
+            }}
+          />
         </motion.div>
       </div>
-
-      <AnimatePresence>
-        {modal && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            onClick={() => setModal(false)}
-            className="fixed inset-0 z-[200] flex items-center justify-center bg-background/85 p-6 backdrop-blur-xl"
-          >
-            <motion.img
-              initial={{ scale: 0.85, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              exit={{ scale: 0.9, opacity: 0 }}
-              transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
-              src={profileImg}
-              alt="Viswapriyan R portrait enlarged"
-              className="max-h-[85vh] rounded-3xl border border-primary/30"
-              style={{ boxShadow: "var(--shadow-glow)" }}
-            />
-          </motion.div>
-        )}
-      </AnimatePresence>
     </section>
   );
 }
