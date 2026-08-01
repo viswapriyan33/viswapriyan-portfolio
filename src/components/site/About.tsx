@@ -4,7 +4,7 @@ import { Reveal, SectionTitle } from "./Reveal";
 const CARDS = [
   { icon: GraduationCap, title: "Education", body: "B.E. Computer Science Engineering — St. Joseph's College of Engineering" },
   { icon: MapPin, title: "Location", body: "Chennai, Tamil Nadu, India" },
-  { icon: Languages, title: "Languages", body: "Tamil, English" },
+  { icon: Languages, title: "Languages", body: "English, Tamil, Telugu" },
   { icon: Heart, title: "Interests", body: "UI Design, Animation, Open Source, Cricket" },
   { icon: Sparkles, title: "Soft Skills", body: "Communication, Teamwork, Adaptability, Problem Solving" },
 ];

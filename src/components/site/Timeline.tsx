@@ -15,7 +15,11 @@ const EDUCATION = [
     subtitle: "Bachelor of Engineering — Computer Science Engineering",
     meta: "Chennai, India",
   },
-  { title: "Higher Secondary Education", subtitle: "Computer Science stream", meta: "Tamil Nadu, India" },
+  {
+    title: "Nellai Nadar Matric Higher Secondary School",
+    subtitle: "Higher Secondary Education — Computer Science stream",
+    meta: "Tamil Nadu, India",
+  },
 ];
 
 function Line({ items }: { items: { title: string; body?: string; subtitle?: string; meta?: string }[] }) {

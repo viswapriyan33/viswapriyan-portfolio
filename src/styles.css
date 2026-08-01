@@ -217,3 +217,26 @@
   from { transform: translateX(0); }
   to { transform: translateX(-50%); }
 }
+
+@keyframes preloader-out {
+  0%, 78% { opacity: 1; visibility: visible; }
+  100% { opacity: 0; visibility: hidden; transform: scale(1.06); filter: blur(10px); }
+}
+
+@keyframes preloader-fill {
+  from { width: 0%; }
+  to { width: 100%; }
+}
+
+.preloader {
+  animation: preloader-out 2.7s cubic-bezier(0.76, 0, 0.24, 1) forwards;
+  pointer-events: none;
+}
+
+.preloader-bar {
+  animation: preloader-fill 2s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .preloader { animation-duration: 0.6s; }
+}
