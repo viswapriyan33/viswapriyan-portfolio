@@ -35,10 +35,15 @@ function Magnetic({ children }: { children: React.ReactNode }) {
 
 export function Hero() {
   const [roleIndex, setRoleIndex] = useState(0);
+  const [showScene, setShowScene] = useState(false);
 
   useEffect(() => {
     const t = setInterval(() => setRoleIndex((i) => (i + 1) % ROLES.length), 2600);
-    return () => clearInterval(t);
+    const s = setTimeout(() => setShowScene(true), 1200);
+    return () => {
+      clearInterval(t);
+      clearTimeout(s);
+    };
   }, []);
 
   const title = "Viswapriyan R";
@@ -46,15 +51,18 @@ export function Hero() {
   return (
     <section id="home" className="relative flex min-h-screen items-center overflow-hidden px-6 pt-28 md:pt-24">
       <div className="absolute inset-0 -z-[5] opacity-60">
-        <iframe
-          src="https://my.spline.design/visualicons-eYWGPEiv7WxwYjQRvsruatQA/"
-          title="3D scene"
-          loading="lazy"
-          className="h-full w-full"
-          style={{ border: 0, pointerEvents: "none" }}
-        />
+        {showScene && (
+          <iframe
+            src="https://my.spline.design/visualicons-eYWGPEiv7WxwYjQRvsruatQA/"
+            title="3D scene"
+            loading="lazy"
+            className="h-full w-full"
+            style={{ border: 0, pointerEvents: "none" }}
+          />
+        )}
         <div className="absolute inset-0 bg-gradient-to-r from-background via-background/70 to-background/20" />
       </div>
+
 
       <div className="mx-auto grid w-full max-w-6xl items-center gap-12 md:grid-cols-[1.15fr_0.85fr] md:gap-10">
         <div className="text-center md:text-left">
