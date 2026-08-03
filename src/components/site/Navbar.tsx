@@ -7,12 +7,14 @@ export const NAV_LINKS = [
   { label: "About", href: "#about" },
   { label: "Skills", href: "#skills" },
   { label: "Projects", href: "#projects" },
+  { label: "Internships", href: "#internships" },
   { label: "Experience", href: "#experience" },
   { label: "Education", href: "#education" },
-  { label: "Certificates", href: "#certificates" },
+  { label: "Certifications", href: "#certificates" },
   { label: "Resume", href: "#resume" },
   { label: "Contact", href: "#contact" },
 ];
+
 
 export function Navbar({ onOpenPalette }: { onOpenPalette: () => void }) {
   const [hidden, setHidden] = useState(false);

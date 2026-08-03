@@ -11,23 +11,25 @@ const CARDS = [
 
 export function About() {
   return (
-    <section id="about" className="relative px-6 py-28">
+    <section id="about" className="relative px-6 py-24 md:py-28">
       <div className="mx-auto max-w-6xl">
         <SectionTitle eyebrow="About Me" title="Crafting interfaces with intent." />
         <div className="grid gap-12 md:grid-cols-[1.1fr_1fr]">
           <Reveal className="space-y-5 text-lg leading-relaxed text-muted-foreground">
             <p>
-              I am <span className="text-foreground">Viswapriyan R</span>, an aspiring Front-End Developer currently
+              I am <span className="text-foreground">Viswapriyan R</span>, an aspiring Full Stack Developer currently
               pursuing Computer Science Engineering at St. Joseph&apos;s College of Engineering.
             </p>
             <p>
-              I enjoy building modern, responsive and interactive web applications using the latest technologies.
+              I enjoy building modern, responsive and interactive web applications end to end — from polished
+              interfaces to the services behind them.
             </p>
             <p>
               I am passionate about creating exceptional user experiences with beautiful interfaces, animations and
               clean code.
             </p>
           </Reveal>
+
           <div className="grid gap-4 sm:grid-cols-2">
             {CARDS.map((c, i) => (
               <Reveal key={c.title} delay={i * 0.08}>
