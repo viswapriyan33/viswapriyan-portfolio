@@ -7,12 +7,14 @@ export const NAV_LINKS = [
   { label: "About", href: "#about" },
   { label: "Skills", href: "#skills" },
   { label: "Projects", href: "#projects" },
+  { label: "Internships", href: "#internships" },
   { label: "Experience", href: "#experience" },
   { label: "Education", href: "#education" },
-  { label: "Certificates", href: "#certificates" },
+  { label: "Certifications", href: "#certificates" },
   { label: "Resume", href: "#resume" },
   { label: "Contact", href: "#contact" },
 ];
+
 
 export function Navbar({ onOpenPalette }: { onOpenPalette: () => void }) {
   const [hidden, setHidden] = useState(false);
@@ -58,8 +60,9 @@ export function Navbar({ onOpenPalette }: { onOpenPalette: () => void }) {
               <li key={l.href}>
                 <a
                   href={l.href}
-                  className="rounded-lg px-3 py-2 text-sm text-muted-foreground transition-colors hover:bg-secondary/60 hover:text-foreground"
+                  className="rounded-lg px-2.5 py-2 text-[13px] text-muted-foreground transition-colors hover:bg-secondary/60 hover:text-foreground"
                 >
+
                   {l.label}
                 </a>
               </li>

@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Mail, Phone, Linkedin, Github, Send } from "lucide-react";
+import { Mail, Phone, Linkedin, Github, Send, CheckCircle2, AlertCircle } from "lucide-react";
 import { toast } from "sonner";
 import { Reveal, SectionTitle } from "./Reveal";
 
@@ -10,50 +10,94 @@ const DETAILS = [
   { icon: Github, label: "github.com/viswapriyan33", href: "https://github.com/viswapriyan33" },
 ];
 
+/** Delivers submissions straight to the inbox below — no backend required. */
+const ENDPOINT = "https://formsubmit.co/ajax/viswapriyan10@gmail.com";
+
+type Status = "idle" | "sending" | "sent" | "error";
+
 export function Contact() {
-  const [sending, setSending] = useState(false);
+  const [status, setStatus] = useState<Status>("idle");
+
+  const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const form = e.currentTarget;
+    const data = new FormData(form);
+    const name = String(data.get("name") ?? "").trim();
+    const email = String(data.get("email") ?? "").trim();
+    const message = String(data.get("message") ?? "").trim();
+
+    if (!name || !email || !message) {
+      setStatus("error");
+      toast.error("Please fill in every field before sending.");
+      return;
+    }
+
+    setStatus("sending");
+    try {
+      const res = await fetch(ENDPOINT, {
+        method: "POST",
+        headers: { "Content-Type": "application/json", Accept: "application/json" },
+        body: JSON.stringify({
+          name,
+          email,
+          message,
+          _subject: `Portfolio enquiry from ${name}`,
+          _template: "table",
+        }),
+      });
+      if (!res.ok) throw new Error(`Request failed with ${res.status}`);
+      setStatus("sent");
+      form.reset();
+      toast.success("Message sent — I'll get back to you soon.");
+      setTimeout(() => setStatus("idle"), 4000);
+    } catch {
+      setStatus("error");
+      toast.error("Couldn't send that. Please email viswapriyan10@gmail.com directly.");
+    }
+  };
+
+  const sending = status === "sending";
 
   return (
-    <section id="contact" className="relative px-6 py-28">
+    <section id="contact" className="relative px-6 py-24 md:py-28">
       <div className="mx-auto max-w-6xl">
         <SectionTitle eyebrow="Contact" title="Let's build something together." />
         <div className="grid gap-8 md:grid-cols-[1.1fr_0.9fr]">
           <Reveal>
-            <form
-              className="space-y-4 rounded-3xl p-6 glass md:p-8"
-              onSubmit={(e) => {
-                e.preventDefault();
-                const form = e.currentTarget;
-                const data = new FormData(form);
-                setSending(true);
-                setTimeout(() => {
-                  setSending(false);
-                  form.reset();
-                  toast.success("Thanks! Opening your mail app to send the message.");
-                  window.location.href = `mailto:viswapriyan10@gmail.com?subject=Portfolio enquiry from ${data.get("name")}&body=${encodeURIComponent(String(data.get("message")))}`;
-                }, 700);
-              }}
-            >
+            <form className="space-y-5 rounded-3xl p-6 glass md:p-8" onSubmit={onSubmit}>
               <div>
                 <label htmlFor="name" className="text-xs uppercase tracking-widest text-muted-foreground">Name</label>
-                <input id="name" name="name" required className="mt-2 w-full rounded-xl border border-border bg-transparent px-4 py-3 text-sm outline-none focus:border-primary/70" />
+                <input id="name" name="name" required maxLength={100} className="mt-2 w-full rounded-xl border border-border bg-transparent px-4 py-3 text-sm outline-none transition-colors focus:border-primary/70" />
               </div>
               <div>
                 <label htmlFor="email" className="text-xs uppercase tracking-widest text-muted-foreground">Email</label>
-                <input id="email" name="email" type="email" required className="mt-2 w-full rounded-xl border border-border bg-transparent px-4 py-3 text-sm outline-none focus:border-primary/70" />
+                <input id="email" name="email" type="email" required maxLength={255} className="mt-2 w-full rounded-xl border border-border bg-transparent px-4 py-3 text-sm outline-none transition-colors focus:border-primary/70" />
               </div>
               <div>
                 <label htmlFor="message" className="text-xs uppercase tracking-widest text-muted-foreground">Message</label>
-                <textarea id="message" name="message" rows={5} required className="mt-2 w-full rounded-xl border border-border bg-transparent px-4 py-3 text-sm outline-none focus:border-primary/70" />
+                <textarea id="message" name="message" rows={5} required maxLength={2000} className="mt-2 w-full resize-y rounded-xl border border-border bg-transparent px-4 py-3 text-sm outline-none transition-colors focus:border-primary/70" />
               </div>
-              <button
-                type="submit"
-                disabled={sending}
-                className="inline-flex items-center gap-2 rounded-full px-6 py-3 text-sm font-medium text-primary-foreground transition-transform hover:scale-[1.03] disabled:opacity-60"
-                style={{ background: "var(--gradient-aurora)", boxShadow: "var(--shadow-glow)" }}
-              >
-                <Send className={`h-4 w-4 ${sending ? "animate-pulse" : ""}`} /> {sending ? "Sending" : "Send Message"}
-              </button>
+              <div className="flex flex-wrap items-center gap-4">
+                <button
+                  type="submit"
+                  disabled={sending}
+                  className="inline-flex items-center gap-2 rounded-full px-6 py-3 text-sm font-medium text-primary-foreground transition-transform hover:scale-[1.03] disabled:opacity-60"
+                  style={{ background: "var(--gradient-aurora)", boxShadow: "var(--shadow-glow)" }}
+                >
+                  <Send className={`h-4 w-4 ${sending ? "animate-pulse" : ""}`} />
+                  {sending ? "Sending…" : "Send Message"}
+                </button>
+                {status === "sent" && (
+                  <span className="inline-flex items-center gap-2 text-sm text-primary">
+                    <CheckCircle2 className="h-4 w-4" /> Message delivered
+                  </span>
+                )}
+                {status === "error" && (
+                  <span className="inline-flex items-center gap-2 text-sm text-destructive">
+                    <AlertCircle className="h-4 w-4" /> Something went wrong
+                  </span>
+                )}
+              </div>
             </form>
           </Reveal>
           <Reveal delay={0.1} className="space-y-3">
@@ -65,7 +109,7 @@ export function Contact() {
                 rel="noreferrer"
                 className="flex items-center gap-4 rounded-2xl p-5 glass transition-all duration-300 hover:-translate-y-1 hover:border-primary/50"
               >
-                <d.icon className="h-5 w-5 text-primary" />
+                <d.icon className="h-5 w-5 shrink-0 text-primary" />
                 <span className="truncate text-sm">{d.label}</span>
               </a>
             ))}

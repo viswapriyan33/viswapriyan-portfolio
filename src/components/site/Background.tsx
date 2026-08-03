@@ -1,6 +1,34 @@
+import { useEffect, useState } from "react";
+
+/**
+ * Full-page animated backdrop. The Spline scene is fixed behind every
+ * section (hero → footer) so it never disappears while content scrolls
+ * over it. Mounted after hydration so it never blocks first paint.
+ */
 export function Background() {
+  const [showScene, setShowScene] = useState(false);
+
+  useEffect(() => {
+    const t = setTimeout(() => setShowScene(true), 900);
+    return () => clearTimeout(t);
+  }, []);
+
   return (
     <div className="pointer-events-none fixed inset-0 -z-10 overflow-hidden bg-background" aria-hidden>
+      {showScene && (
+        <div className="absolute inset-0 opacity-55">
+          <iframe
+            src="https://my.spline.design/visualicons-eYWGPEiv7WxwYjQRvsruatQA/"
+            title="3D animated background"
+            loading="lazy"
+            className="h-full w-full"
+            style={{ border: 0, pointerEvents: "none" }}
+          />
+          {/* soften the scene so text stays readable across the whole page */}
+          <div className="absolute inset-0 bg-background/45" />
+        </div>
+      )}
+
       <div
         className="absolute -left-40 top-[-10%] h-[46rem] w-[46rem] rounded-full opacity-40 blur-[120px]"
         style={{ background: "radial-gradient(circle, var(--primary), transparent 65%)", animation: "float-orb 18s ease-in-out infinite" }}

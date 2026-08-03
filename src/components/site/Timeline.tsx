@@ -2,12 +2,13 @@ import { Reveal, SectionTitle } from "./Reveal";
 
 const EXPERIENCE = [
   { title: "Currently Learning", body: "Advanced React patterns, performance and accessibility." },
-  { title: "React & Next.js", body: "Component architecture, routing, data fetching and SSR." },
-  { title: "Animations", body: "GSAP timelines, ScrollTrigger and Framer Motion micro-interactions." },
-  { title: "Frontend Development", body: "Responsive layouts, design systems and clean, typed code." },
+  { title: "React & REST APIs", body: "Component architecture, routing, data fetching and API integration." },
+  { title: "Animations", body: "GSAP timelines, ScrollTrigger and Motion micro-interactions." },
+  { title: "Full Stack Development", body: "Responsive layouts, design systems, databases and clean, typed code." },
   { title: "Open Source", body: "Contributing to community projects and shipping in public." },
-  { title: "Future Internship", body: "Open to front-end internship opportunities in 2026." },
+  { title: "Future Internship", body: "Open to full stack internship opportunities in 2026." },
 ];
+
 
 const EDUCATION = [
   {
@@ -47,9 +48,10 @@ function Line({ items }: { items: { title: string; body?: string; subtitle?: str
 
 export function Experience() {
   return (
-    <section id="experience" className="relative px-6 py-28">
+    <section id="experience" className="relative px-6 py-24 md:py-28">
       <div className="mx-auto max-w-6xl">
         <SectionTitle eyebrow="Experience" title="Where I am on the journey." />
+
         <Line items={EXPERIENCE} />
       </div>
     </section>
@@ -58,9 +60,10 @@ export function Experience() {
 
 export function Education() {
   return (
-    <section id="education" className="relative px-6 py-28">
+    <section id="education" className="relative px-6 py-24 md:py-28">
       <div className="mx-auto max-w-6xl">
         <SectionTitle eyebrow="Education" title="Academic background." />
+
         <Line items={EDUCATION} />
       </div>
     </section>
