@@ -1,15 +1,14 @@
 import { useEffect, useRef } from "react";
 
 /**
- * Premium custom cursor: a soft aurora glow, a lerped outline ring and a
- * crisp dot. Runs entirely on rAF + transforms so it never lags or flickers,
- * and stays glued to the pointer while scrolling.
+ * Clean, professional pointer cursor: a crisp arrow that tracks the pointer
+ * exactly (no lag), sits on a soft aurora glow and grows slightly over
+ * interactive elements. rAF + transforms only, so it never flickers.
  */
 export function Cursor() {
-  const glow = useRef<HTMLDivElement>(null);
-  const ring = useRef<HTMLDivElement>(null);
-  const dot = useRef<HTMLDivElement>(null);
   const root = useRef<HTMLDivElement>(null);
+  const pointer = useRef<HTMLDivElement>(null);
+  const glow = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     if (typeof window === "undefined") return;
@@ -21,8 +20,6 @@ export function Cursor() {
 
     let x = window.innerWidth / 2;
     let y = window.innerHeight / 2;
-    let rx = x;
-    let ry = y;
     let gx = x;
     let gy = y;
     let scale = 1;
@@ -30,51 +27,46 @@ export function Cursor() {
     let raf = 0;
     let visible = false;
 
+    const hoverTargets = 'a, button, [role="button"], input, textarea, select, [data-cursor]';
+
     const setVisible = (v: boolean) => {
       visible = v;
       if (root.current) root.current.style.opacity = v ? "1" : "0";
     };
 
-    const hoverTargets = 'a, button, [role="button"], input, textarea, select, [data-cursor]';
+    const evaluate = () => {
+      const el = document.elementFromPoint(x, y) as HTMLElement | null;
+      targetScale = el?.closest?.(hoverTargets) ? 1.35 : 1;
+    };
 
     const onMove = (e: PointerEvent) => {
       x = e.clientX;
       y = e.clientY;
       if (!visible) setVisible(true);
       const el = (e.target as HTMLElement | null)?.closest?.(hoverTargets);
-      targetScale = el ? 2.1 : 1;
+      targetScale = el ? 1.35 : 1;
     };
 
-    // Pointer coordinates are viewport-based, so they stay valid on scroll —
-    // but the hovered element under the pointer can change, so re-evaluate.
-    const onScroll = () => {
-      const el = document.elementFromPoint(x, y) as HTMLElement | null;
-      targetScale = el?.closest?.(hoverTargets) ? 2.1 : 1;
-    };
-
-    const onDown = () => (targetScale = targetScale * 0.7);
-    const onUp = () => onScroll();
+    const onDown = () => (targetScale = 0.85);
+    const onUp = () => evaluate();
     const onLeave = () => setVisible(false);
     const onEnter = () => setVisible(true);
 
     const loop = () => {
-      rx += (x - rx) * 0.2;
-      ry += (y - ry) * 0.2;
-      gx += (x - gx) * 0.08;
-      gy += (y - gy) * 0.08;
-      scale += (targetScale - scale) * 0.18;
+      gx += (x - gx) * 0.16;
+      gy += (y - gy) * 0.16;
+      scale += (targetScale - scale) * 0.2;
 
-      if (dot.current) dot.current.style.transform = `translate3d(${x}px, ${y}px, 0) translate(-50%, -50%)`;
-      if (ring.current)
-        ring.current.style.transform = `translate3d(${rx}px, ${ry}px, 0) translate(-50%, -50%) scale(${scale})`;
+      if (pointer.current)
+        pointer.current.style.transform = `translate3d(${x}px, ${y}px, 0) scale(${scale})`;
       if (glow.current)
-        glow.current.style.transform = `translate3d(${gx}px, ${gy}px, 0) translate(-50%, -50%) scale(${0.8 + scale * 0.35})`;
+        glow.current.style.transform = `translate3d(${gx}px, ${gy}px, 0) translate(-50%, -50%) scale(${0.85 + scale * 0.3})`;
 
       raf = requestAnimationFrame(loop);
     };
 
     window.addEventListener("pointermove", onMove, { passive: true });
-    window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("scroll", evaluate, { passive: true });
     window.addEventListener("pointerdown", onDown, { passive: true });
     window.addEventListener("pointerup", onUp, { passive: true });
     document.addEventListener("mouseleave", onLeave);
@@ -83,7 +75,7 @@ export function Cursor() {
 
     return () => {
       window.removeEventListener("pointermove", onMove);
-      window.removeEventListener("scroll", onScroll);
+      window.removeEventListener("scroll", evaluate);
       window.removeEventListener("pointerdown", onDown);
       window.removeEventListener("pointerup", onUp);
       document.removeEventListener("mouseleave", onLeave);
@@ -101,22 +93,28 @@ export function Cursor() {
     >
       <div
         ref={glow}
-        className="absolute left-0 top-0 h-24 w-24 rounded-full blur-2xl"
+        className="absolute left-0 top-0 h-16 w-16 rounded-full blur-2xl"
         style={{
-          background: "radial-gradient(circle, color-mix(in oklab, var(--primary) 55%, transparent), transparent 70%)",
-          opacity: 0.5,
+          background: "radial-gradient(circle, color-mix(in oklab, var(--primary) 60%, transparent), transparent 70%)",
+          opacity: 0.45,
         }}
       />
       <div
-        ref={ring}
-        className="absolute left-0 top-0 h-8 w-8 rounded-full border border-primary/60"
-        style={{ mixBlendMode: "screen", boxShadow: "0 0 18px -2px var(--primary)" }}
-      />
-      <div
-        ref={dot}
-        className="absolute left-0 top-0 h-1.5 w-1.5 rounded-full bg-neon"
-        style={{ boxShadow: "0 0 12px var(--neon)" }}
-      />
+        ref={pointer}
+        className="absolute left-0 top-0 origin-top-left"
+        style={{ transition: "none" }}
+      >
+        <svg width="22" height="26" viewBox="0 0 22 26" fill="none" style={{ display: "block" }}>
+          <path
+            d="M2 1.6 L2 21.4 L7.3 16.4 L10.6 24 L14 22.4 L10.8 15.1 L18 15.1 Z"
+            fill="var(--foreground)"
+            stroke="var(--primary)"
+            strokeWidth="1.4"
+            strokeLinejoin="round"
+            style={{ filter: "drop-shadow(0 0 6px var(--primary))" }}
+          />
+        </svg>
+      </div>
     </div>
   );
 }
