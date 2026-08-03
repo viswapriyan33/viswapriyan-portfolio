@@ -51,12 +51,14 @@ function Index() {
         <About />
         <TechStack />
         <Projects />
+        <Internships />
         <Experience />
         <Education />
         <Certificates />
         <Resume />
         <Contact />
       </main>
+
       <Footer />
     </>
   );
