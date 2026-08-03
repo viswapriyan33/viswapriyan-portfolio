@@ -9,14 +9,16 @@ import { About } from "@/components/site/About";
 import { TechStack } from "@/components/site/TechStack";
 import { Projects } from "@/components/site/Projects";
 import { Experience, Education } from "@/components/site/Timeline";
+import { Internships } from "@/components/site/Internships";
 import { Certificates, Resume } from "@/components/site/Certificates";
 import { Contact } from "@/components/site/Contact";
 import { Footer } from "@/components/site/Footer";
 import { BackToTop, CommandPalette, ScrollProgress } from "@/components/site/Chrome";
 
-const TITLE = "Viswapriyan R — Front-End Developer Portfolio";
+const TITLE = "Viswapriyan R — Full Stack Developer Portfolio";
 const DESC =
-  "Portfolio of Viswapriyan R, aspiring front-end developer at St. Joseph's College of Engineering, building modern, beautiful and interactive web experiences.";
+  "Portfolio of Viswapriyan R, aspiring full stack developer at St. Joseph's College of Engineering, building modern, beautiful and interactive web experiences.";
+
 
 export const Route = createFileRoute("/")({
   head: () => ({

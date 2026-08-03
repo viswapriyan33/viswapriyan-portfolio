@@ -78,19 +78,20 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Viswapriyan R — Front-End Developer" },
+      { title: "Viswapriyan R — Full Stack Developer" },
       {
         name: "description",
-        content: "Premium portfolio of Viswapriyan R, aspiring front-end developer.",
+        content: "Premium portfolio of Viswapriyan R, aspiring full stack developer.",
       },
       { name: "author", content: "Viswapriyan R" },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
-      { property: "og:title", content: "Viswapriyan R — Front-End Developer" },
-      { name: "twitter:title", content: "Viswapriyan R — Front-End Developer" },
-      { property: "og:description", content: "Premium portfolio of Viswapriyan R, aspiring front-end developer." },
-      { name: "twitter:description", content: "Premium portfolio of Viswapriyan R, aspiring front-end developer." },
+      { property: "og:title", content: "Viswapriyan R — Full Stack Developer" },
+      { name: "twitter:title", content: "Viswapriyan R — Full Stack Developer" },
+      { property: "og:description", content: "Premium portfolio of Viswapriyan R, aspiring full stack developer." },
+      { name: "twitter:description", content: "Premium portfolio of Viswapriyan R, aspiring full stack developer." },
     ],
+
     links: [
       {
         rel: "stylesheet",

@@ -60,8 +60,9 @@ export function Navbar({ onOpenPalette }: { onOpenPalette: () => void }) {
               <li key={l.href}>
                 <a
                   href={l.href}
-                  className="rounded-lg px-3 py-2 text-sm text-muted-foreground transition-colors hover:bg-secondary/60 hover:text-foreground"
+                  className="rounded-lg px-2.5 py-2 text-[13px] text-muted-foreground transition-colors hover:bg-secondary/60 hover:text-foreground"
                 >
+
                   {l.label}
                 </a>
               </li>
