@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { AnimatePresence, motion } from "motion/react";
 import { ArrowDown, Download, Mail } from "lucide-react";
 import profileImg from "@/assets/viswa-cutout.png";
@@ -12,19 +12,19 @@ const ROLES = [
 ];
 
 function Magnetic({ children }: { children: React.ReactNode }) {
-  const ref = useState<HTMLSpanElement | null>(null);
-  const [el, setEl] = ref;
+  const ref = useRef<HTMLSpanElement>(null);
   return (
     <span
-      ref={setEl}
+      ref={ref}
       className="inline-block"
       onMouseMove={(e) => {
+        const el = ref.current;
         if (!el) return;
         const r = el.getBoundingClientRect();
         el.style.transform = `translate(${(e.clientX - r.left - r.width / 2) * 0.22}px, ${(e.clientY - r.top - r.height / 2) * 0.3}px)`;
       }}
       onMouseLeave={() => {
-        if (el) el.style.transform = "translate(0,0)";
+        if (ref.current) ref.current.style.transform = "translate(0,0)";
       }}
       style={{ transition: "transform 350ms cubic-bezier(0.22,1,0.36,1)" }}
     >
@@ -32,6 +32,7 @@ function Magnetic({ children }: { children: React.ReactNode }) {
     </span>
   );
 }
+
 
 export function Hero() {
   const [roleIndex, setRoleIndex] = useState(0);
