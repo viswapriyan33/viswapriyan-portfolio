@@ -30,37 +30,48 @@ export function Internships() {
 
   useEffect(() => {
     if (typeof window === "undefined") return;
+    const el = scope.current;
+    if (!el) return;
     gsap.registerPlugin(ScrollTrigger);
 
-    const ctx = gsap.context(() => {
-      gsap.from(".internship-card", {
-        opacity: 0,
-        y: 48,
-        filter: "blur(10px)",
-        duration: 0.9,
-        stagger: 0.18,
-        ease: "power3.out",
-        scrollTrigger: { trigger: scope.current, start: "top 75%" },
-      });
-      gsap.from(".internship-line", {
-        scaleY: 0,
-        transformOrigin: "top center",
-        duration: 1.2,
-        ease: "power2.out",
-        scrollTrigger: { trigger: scope.current, start: "top 78%" },
-      });
-      gsap.from(".internship-dot", {
-        scale: 0,
-        opacity: 0,
-        duration: 0.6,
-        stagger: 0.18,
-        ease: "back.out(2)",
-        scrollTrigger: { trigger: scope.current, start: "top 75%" },
-      });
-    }, scope);
+    let ctx: gsap.Context | undefined;
+    const play = () => {
+      ctx = gsap.context(() => {
+        gsap.fromTo(
+          ".internship-line",
+          { scaleY: 0, transformOrigin: "top center" },
+          { scaleY: 1, duration: 1.2, ease: "power2.out" },
+        );
+        gsap.fromTo(
+          ".internship-dot",
+          { scale: 0, opacity: 0 },
+          { scale: 1, opacity: 1, duration: 0.6, stagger: 0.18, ease: "back.out(2)", delay: 0.15 },
+        );
+        gsap.fromTo(
+          ".internship-card",
+          { opacity: 0, y: 48, filter: "blur(10px)" },
+          { opacity: 1, y: 0, filter: "blur(0px)", duration: 0.9, stagger: 0.18, ease: "power3.out" },
+        );
+      }, el);
+    };
 
-    return () => ctx.revert();
+    const io = new IntersectionObserver(
+      (entries) => {
+        if (entries.some((e) => e.isIntersecting)) {
+          io.disconnect();
+          play();
+        }
+      },
+      { rootMargin: "-10% 0px -10% 0px" },
+    );
+    io.observe(el);
+
+    return () => {
+      io.disconnect();
+      ctx?.revert();
+    };
   }, []);
+
 
   return (
     <section id="internships" className="relative px-6 py-24 md:py-28">
