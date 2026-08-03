@@ -196,10 +196,12 @@
 }
 
 @utility glass {
-  background: color-mix(in oklab, var(--color-card) 45%, transparent);
-  backdrop-filter: blur(18px) saturate(140%);
+  background: color-mix(in oklab, var(--color-card) 66%, transparent);
+  backdrop-filter: blur(22px) saturate(150%);
   border: 1px solid var(--color-border);
+  box-shadow: inset 0 1px 0 0 oklch(1 0 0 / 0.05);
 }
+
 
 @utility text-aurora {
   background: var(--gradient-aurora);

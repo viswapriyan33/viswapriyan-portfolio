@@ -48,9 +48,10 @@ function Line({ items }: { items: { title: string; body?: string; subtitle?: str
 
 export function Experience() {
   return (
-    <section id="experience" className="relative px-6 py-28">
+    <section id="experience" className="relative px-6 py-24 md:py-28">
       <div className="mx-auto max-w-6xl">
         <SectionTitle eyebrow="Experience" title="Where I am on the journey." />
+
         <Line items={EXPERIENCE} />
       </div>
     </section>
@@ -59,9 +60,10 @@ export function Experience() {
 
 export function Education() {
   return (
-    <section id="education" className="relative px-6 py-28">
+    <section id="education" className="relative px-6 py-24 md:py-28">
       <div className="mx-auto max-w-6xl">
         <SectionTitle eyebrow="Education" title="Academic background." />
+
         <Line items={EDUCATION} />
       </div>
     </section>
