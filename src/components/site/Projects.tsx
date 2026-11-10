@@ -69,7 +69,7 @@ const FEATURED_PROJECTS: FeaturedProject[] = [
   },
   {
     id: "citizen-science",
-    title: "Citizen Science Data Aggregation Platform",
+    title: "Citizen Science Data Aggregation Platform (Mechovate)",
     category: "GraphRAG, Voice AI & Geospatial",
     icon: Globe2,
     gradient:

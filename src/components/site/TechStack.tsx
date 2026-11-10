@@ -1,13 +1,13 @@
 import { useState } from "react";
 import { AnimatePresence, motion } from "motion/react";
 import {
+  Cloud,
   Code2,
   Cpu,
   Database,
   Eye,
   Globe,
   KeyRound,
-  Layers,
   Server,
   ShieldCheck,
   Terminal,
@@ -78,6 +78,7 @@ const SKILLS: Skill[] = [
   { name: "GitHub", category: "Tools", src: `${CDN}/github/github-original.svg`, invert: true },
   { name: "VS Code", category: "Tools", src: `${CDN}/vscode/vscode-original.svg` },
   { name: "Postman", category: "Tools", src: `${CDN}/postman/postman-original.svg` },
+  { name: "AWS", category: "Tools", icon: Cloud },
 ];
 
 const CATEGORY_GROUPS: { title: Exclude<Category, "All">; icon: LucideIcon }[] = [

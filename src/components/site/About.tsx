@@ -5,7 +5,7 @@ const HIGHLIGHTS = [
   {
     icon: GraduationCap,
     title: "Education",
-    body: "B.E. Computer Science & Engineering · St. Joseph's College of Engineering, Chennai (CGPA: 7.98 · May 2028)",
+    body: "B.E. Computer Science & Engineering · St. Joseph's College of Engineering, Chennai (CGPA: 7.98/10 · May 2028)",
   },
   {
     icon: Layers,

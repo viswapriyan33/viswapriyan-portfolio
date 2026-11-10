@@ -133,8 +133,8 @@ export function Hero() {
             </Magnetic>
             <Magnetic>
               <a
-                href="/resume.pdf"
-                download
+                href="/resume.pdf?v=2"
+                download="Viswapriyan_R_Resume.pdf"
                 className="inline-flex items-center gap-2 rounded-full border border-border px-5 py-3 text-sm font-medium glass transition-colors hover:border-primary/60"
               >
                 <Download className="h-4 w-4" /> Resume

@@ -5,14 +5,14 @@ const EDUCATION = [
   {
     degree: "B.E. Computer Science and Engineering",
     institution: "St. Joseph's College of Engineering, Chennai",
-    score: "CGPA: 7.98",
+    score: "CGPA: 7.98/10",
     period: "Graduating May 2028",
   },
   {
     degree: "HSSC (State Board)",
     institution: "Nellai Nadar Matriculation Higher Secondary School, Chennai",
     score: "88.16%",
-    period: "Graduated Mar 2024",
+    period: "Graduated March 2024",
   },
 ];
 
