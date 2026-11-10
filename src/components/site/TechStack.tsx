@@ -103,7 +103,7 @@ function SkillVisual({ skill }: { skill: Skill }) {
         height={36}
         onError={() => setImgFailed(true)}
         className={`h-8 w-8 object-contain transition-transform duration-300 group-hover:scale-110 md:h-9 md:w-9 ${
-          skill.invert ? "invert" : ""
+          skill.invert ? "invert [.light_&]:invert-0" : ""
         }`}
       />
     );
