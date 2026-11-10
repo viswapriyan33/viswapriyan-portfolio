@@ -41,7 +41,7 @@ export function Internships() {
         gsap.fromTo(
           ".exp-line",
           { scaleY: 0, transformOrigin: "top center" },
-          { scaleY: 1, duration: 0.75, ease: "power2.out" },
+          { scaleY: 1, duration: 0.4, ease: "power2.out" },
         );
         gsap.fromTo(
           ".exp-dot",
@@ -49,16 +49,16 @@ export function Internships() {
           {
             scale: 1,
             opacity: 1,
-            duration: 0.45,
-            stagger: 0.14,
-            ease: "back.out(1.8)",
-            delay: 0.1,
+            duration: 0.28,
+            stagger: 0.08,
+            ease: "back.out(1.6)",
+            delay: 0.04,
           },
         );
         gsap.fromTo(
           ".exp-card",
-          { opacity: 0, y: 26 },
-          { opacity: 1, y: 0, duration: 0.55, stagger: 0.14, ease: "power3.out" },
+          { opacity: 0, y: 16 },
+          { opacity: 1, y: 0, duration: 0.32, stagger: 0.08, ease: "power3.out" },
         );
       }, el);
     };
@@ -70,7 +70,7 @@ export function Internships() {
           play();
         }
       },
-      { rootMargin: "-60px 0px -60px 0px" },
+      { rootMargin: "80px 0px 80px 0px" },
     );
     io.observe(el);
 

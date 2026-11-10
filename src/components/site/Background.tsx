@@ -10,24 +10,7 @@ export function Background() {
   const [sceneLoaded, setSceneLoaded] = useState(false);
 
   useEffect(() => {
-    let cancelled = false;
-    const trigger = () => {
-      if (!cancelled) setMountScene(true);
-    };
-
-    if (typeof window.requestIdleCallback === "function") {
-      const id = window.requestIdleCallback(trigger, { timeout: 450 });
-      return () => {
-        cancelled = true;
-        window.cancelIdleCallback(id);
-      };
-    }
-
-    const t = globalThis.setTimeout(trigger, 250);
-    return () => {
-      cancelled = true;
-      globalThis.clearTimeout(t);
-    };
+    setMountScene(true);
   }, []);
 
   return (
@@ -37,14 +20,13 @@ export function Background() {
     >
       {mountScene && (
         <div
-          className={`absolute inset-0 transition-opacity duration-700 ${
+          className={`absolute inset-0 transition-opacity duration-300 ${
             sceneLoaded ? "opacity-55" : "opacity-0"
           }`}
         >
           <iframe
             src="https://my.spline.design/visualicons-eYWGPEiv7WxwYjQRvsruatQA/"
             title="3D animated chip background"
-            loading="lazy"
             onLoad={() => setSceneLoaded(true)}
             className="h-full w-full"
             style={{ border: 0, pointerEvents: "none" }}

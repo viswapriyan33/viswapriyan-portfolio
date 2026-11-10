@@ -50,9 +50,9 @@ export function Hero() {
       <div className="mx-auto grid w-full max-w-6xl items-center gap-10 md:grid-cols-[1.2fr_0.8fr] md:gap-10">
         <div className="text-center md:text-left">
           <motion.span
-            initial={{ opacity: 0, y: 10 }}
+            initial={{ opacity: 0, y: 6 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.45 }}
+            transition={{ duration: 0.24 }}
             className="inline-flex items-center gap-2 rounded-full border border-border px-3.5 py-1.5 text-xs text-muted-foreground glass"
           >
             <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-neon" />
@@ -61,9 +61,9 @@ export function Hero() {
 
           <h1 className="mt-6 font-display font-semibold leading-[1.06] tracking-[-0.03em]">
             <motion.span
-              initial={{ opacity: 0, y: 12 }}
+              initial={{ opacity: 0, y: 8 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.45, delay: 0.06 }}
+              transition={{ duration: 0.24, delay: 0.02 }}
               className="block text-[clamp(1rem,2.6vw,1.45rem)] font-medium text-muted-foreground"
             >
               Hi, I&apos;m
@@ -72,9 +72,9 @@ export function Hero() {
               {title.split("").map((c, i) => (
                 <motion.span
                   key={i}
-                  initial={{ opacity: 0, y: 24 }}
+                  initial={{ opacity: 0, y: 14 }}
                   animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.1 + i * 0.022, duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
+                  transition={{ delay: 0.03 + i * 0.012, duration: 0.25, ease: [0.22, 1, 0.36, 1] }}
                   className="inline-block text-aurora"
                 >
                   {c === " " ? "\u00A0" : c}
@@ -87,10 +87,10 @@ export function Hero() {
             <AnimatePresence mode="wait">
               <motion.p
                 key={roleIndex}
-                initial={{ y: 20, opacity: 0 }}
+                initial={{ y: 14, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
-                exit={{ y: -20, opacity: 0 }}
-                transition={{ duration: 0.35 }}
+                exit={{ y: -14, opacity: 0 }}
+                transition={{ duration: 0.24 }}
                 className="font-display text-lg font-medium tracking-tight text-primary md:text-xl"
               >
                 {ROLES[roleIndex]}
@@ -99,9 +99,9 @@ export function Hero() {
           </div>
 
           <motion.p
-            initial={{ opacity: 0, y: 10 }}
+            initial={{ opacity: 0, y: 6 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.28, duration: 0.5 }}
+            transition={{ delay: 0.12, duration: 0.26 }}
             className="mx-auto mt-4 max-w-xl text-sm leading-relaxed text-muted-foreground md:mx-0 md:text-base"
           >
             Computer Science undergraduate and Freelance Full Stack Developer building scalable web
@@ -109,9 +109,9 @@ export function Hero() {
           </motion.p>
 
           <motion.div
-            initial={{ opacity: 0, y: 14 }}
+            initial={{ opacity: 0, y: 8 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.38, duration: 0.45 }}
+            transition={{ delay: 0.16, duration: 0.26 }}
             className="mt-8 flex flex-wrap items-center justify-center gap-3.5 md:justify-start"
           >
             <Magnetic>
@@ -145,7 +145,7 @@ export function Hero() {
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            transition={{ delay: 0.48, duration: 0.45 }}
+            transition={{ delay: 0.22, duration: 0.25 }}
             className="mt-7 flex items-center justify-center gap-3 md:justify-start"
           >
             <a
@@ -185,9 +185,9 @@ export function Hero() {
         </div>
 
         <motion.div
-          initial={{ opacity: 0, scale: 0.96, y: 14 }}
+          initial={{ opacity: 0, scale: 0.97, y: 8 }}
           animate={{ opacity: 1, scale: 1, y: 0 }}
-          transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1], delay: 0.15 }}
+          transition={{ duration: 0.32, ease: [0.22, 1, 0.36, 1], delay: 0.05 }}
           className="relative mx-auto w-full max-w-[14.5rem] sm:max-w-[16.5rem] md:max-w-[18.5rem] lg:max-w-[20rem]"
         >
           <motion.img
